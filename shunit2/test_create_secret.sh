@@ -13,6 +13,8 @@ aws() {
 EOF
 }
 
+# Integration test
+
 testMain() {
   (. "$under_test" ; SECRET_NAME=MyTestDatabaseSecret SECRET_DESC="My test" SECRET=abcd1234 main)
 
@@ -22,6 +24,23 @@ testMain() {
   local actual_behaviour="$(<commands_log)"
 
   assertEquals "unexpected behaviour" "$expected_behaviour" "$actual_behaviour"
+}
+
+# Unit tests
+
+testSanityCheck1() {
+  (. "$under_test" ; usage() { exit 1 ; } ; SECRET_NAME=MyTestDatabaseSecret SECRET_DESC="My test" sanity_check)
+  assertFalse "expected false got true" "$?"
+}
+
+testSanityCheck2() {
+  (. "$under_test" ; usage() { exit 1 ; } ; SECRET_NAME=MyTestDatabaseSecret SECRET=abcd1234 sanity_check)
+  assertFalse "expected false got true" "$?"
+}
+
+testSanityCheck3() {
+  (. "$under_test" ; usage() { exit 1 ; } ; SECRET_DESC="My test" SECRET=abcd1234 sanity_check)
+  assertFalse "expected false got true" "$?"
 }
 
 tearDown() {
