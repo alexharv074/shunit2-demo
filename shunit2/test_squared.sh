@@ -6,6 +6,8 @@ setUp() {
   . "$under_test"
 }
 
+# Integration tests of the main function!
+
 test3Squared() {
   local n_sq="$(main 3)"
   assertEquals "did not compute 3^2" "$n_sq" "9"
@@ -19,6 +21,13 @@ test4Squared() {
 testUsage() {
   main | grep -qi usage
   assertTrue "did not see usage" "$?"
+}
+
+# Unit tests!
+
+testNSquared() {
+  local n_sq="$(n_squared 3)"
+  assertEquals "did not compute 3^2" "$n_sq" "9"
 }
 
 . shunit2
