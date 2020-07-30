@@ -43,6 +43,11 @@ testSanityCheck3() {
   assertFalse "expected false got true" "$?"
 }
 
+testSanityCheckSurprisingBug() {
+  (. "$under_test" ; usage() { exit 1 ; } ; SECRET_NAME=MyTestDatabaseSecret SECRET_DESC="My test" SECRET=abcd1234 sanity_check)
+  assertTrue "expected true" "$?"
+}
+
 tearDown() {
   rm -f commands_log
 }
