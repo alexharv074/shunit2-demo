@@ -30,4 +30,9 @@ testNSquared() {
   assertEquals "did not compute 3^2" "$n_sq" "9"
 }
 
+testUsageExitStatus() {
+  usage
+  assertFalse "usage returned wrong exit status" "$?"
+}
+
 . shunit2
