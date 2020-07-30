@@ -31,7 +31,7 @@ testNSquared() {
 }
 
 testUsageExitStatus() {
-  usage
+  (usage)
   assertFalse "usage returned wrong exit status" "$?"
 }
 
