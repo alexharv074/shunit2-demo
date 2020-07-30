@@ -12,4 +12,9 @@ test4Squared() {
   assertEquals "did not compute 4^2" "$n_sq" "16"
 }
 
+testUsage() {
+  bash "$under_test" | grep -qi usage
+  assertTrue "did not see usage" "$?"
+}
+
 . shunit2
