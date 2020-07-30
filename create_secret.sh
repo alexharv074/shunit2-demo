@@ -11,6 +11,7 @@ sanity_check() {
   [ -z "$SECRET_DESC" ] && usage
   [ -z "$SECRET_NAME" ] && usage
   [ -z "$SECRET" ] && usage
+  return 0
 }
 
 create_secret() {
