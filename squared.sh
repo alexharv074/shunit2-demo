@@ -6,8 +6,17 @@ usage() {
   exit 1
 }
 
-[ -z "$1" ] && usage
+n_squared() {
+  echo "$(( $1 * $1 ))"
+}
 
-echo "$(( $1 * $1 ))"
+main() {
+  [ -z "$1" ] && usage
+  n="$1" ; n_squared "$n"
+}
+
+if [ "$0" == "${BASH_SOURCE[0]}" ] ; then
+  main "$@"
+fi
 
 # vim: set ft=sh:
